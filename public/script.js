@@ -179,14 +179,18 @@ async function checkApiConnection() {
     const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.REQUEST_TIMEOUT);
 
     const response = await fetch(API_CONFIG.STATUS_URL, { signal: controller.signal });
+
     clearTimeout(timeoutId);
     
     const data = await response.json();
+    const isConnected = data.status === 'connected';
+
     if (statusElement) {
-      statusElement.className = data.connected ? 'status-connected' : 'status-disconnected';
-      statusElement.innerHTML = `<i class="fas fa-${data.connected ? 'check' : 'times'}-circle"></i> ${data.connected ? 'Connected' : 'Disconnected'}`;
+      statusElement.className = isConnected ? 'status-connected' : 'status-disconnected';
+      statusElement.innerHTML = `<i class="fas fa-${isConnected ? 'check' : 'times'}-circle"></i> ${isConnected ? 'Connected' : 'Disconnected'}`;
     }
-    return data.connected === true;
+
+    return isConnected;
   } catch (error) {
     console.error('API connection check failed:', error);
     if (statusElement) {
