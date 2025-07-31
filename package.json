@@ -1,9 +1,10 @@
 {
-  "name": "static-web-on-railway",
+  "name": "ultraxweb",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "UltraXWeb public panel",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2"
