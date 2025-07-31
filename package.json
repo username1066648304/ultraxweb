@@ -2,9 +2,9 @@
   "name": "ultraxweb",
   "version": "1.0.0",
   "description": "UltraXWeb public panel",
-  "main": "index.js",
+  "main": "deploy.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node deploy.js"
   },
   "dependencies": {
     "express": "^4.18.2"
