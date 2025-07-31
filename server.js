@@ -1,15 +1,16 @@
-const express = require("express");
-const path = require("path");
-
+const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 2001;
 
-app.use(express.static(path.join(__dirname, "public")));
+// Menyajikan file HTML, CSS, JS dari folder "public"
+app.use(express.static('public'));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// Endpoint utama
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
 });
 
+// Jalankan server
 app.listen(PORT, () => {
-  console.log(`Web running on http://localhost:${PORT}`);
+  console.log(`✅ Server aktif di http://localhost:${PORT}`);
 });
