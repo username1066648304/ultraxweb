@@ -54,10 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   hamburger.addEventListener('click', toggleMenu);
   menuOverlay.addEventListener('click', toggleMenu);
   
-  // Check API connection status
-  checkApiConnection();
-});
-
 /* ========== UTILITY FUNCTIONS ========== */
 function generateDeviceId() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -743,9 +739,6 @@ function showDashboard() {
   document.getElementById('infoRole').textContent = currentUser.role;
   document.getElementById('infoDeviceId').textContent = localDeviceId;
   document.getElementById('infoExpired').textContent = currentUser.expired || 'N/A';
-  
-  document.getElementById('myInfoUsername').value = currentUser.username;
-  document.getElementById('myInfoRole').value = currentUser.role;
   
   updateSideMenu();
   startInactivityTimer();
