@@ -54,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
   hamburger.addEventListener('click', toggleMenu);
   menuOverlay.addEventListener('click', toggleMenu);
   
+  // Check API connection status
+  checkApiConnection();
+});
+
 /* ========== UTILITY FUNCTIONS ========== */
 function generateDeviceId() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
