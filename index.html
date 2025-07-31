@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UltraXweb</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header with Hamburger -->
+  <div class="header hidden" id="header">
+    <div class="hamburger" id="hamburger">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    <div class="logo">UltraXweb</div>
+    <div></div>
+  </div>
+
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Login Form -->
+    <div class="card" id="loginCard">
+      <h2 style="text-align: center;">Welcome To UltraXweb</h2>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" class="form-control" placeholder="Enter your username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="password-container">
+          <input type="password" id="password" class="form-control" placeholder="Enter your password">
+          <button type="button" class="password-toggle" onclick="togglePassword('password')">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <button class="btn" onclick="login()" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      
+      <a href="https://t.me/dilxVXII" target="_blank" class="btn btn-telegram">
+        <i class="fab fa-telegram"></i> Buy Access via Telegram
+      </a>
+      
+      <div id="loginResult" style="margin-top: 15px; text-align: center;"></div>
+    </div>
+
+<!-- Dashboard -->
+<div class="card hidden" id="dashboard">
+  <h2 style="text-align: center; margin-bottom: 25px;">Dashboard</h2>
+  
+  <div class="info-box-container">
+    <div class="info-box">
+      <div class="info-box-label">Username</div>
+      <div class="info-box-value" id="infoUsername">-</div>
+    </div>
+    
+    <div class="info-box">
+      <div class="info-box-label">Role</div>
+      <div class="info-box-value" id="infoRole">-</div>
+    </div>
+    
+    <div class="info-box">
+      <div class="info-box-label">Device ID</div>
+      <div class="info-box-value" id="infoDeviceId">-</div>
+    </div>
+    
+    <div class="info-box">
+      <div class="info-box-label">Expired</div>
+      <div class="info-box-value" id="infoExpired">-</div>
+    </div>
+  </div>
+</div>
+
+    <!-- My Info -->
+    <div class="card hidden fade-in" id="myInfo">
+      <h2><i class="fas fa-user"></i> My Info</h2>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="myInfoUsername" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" id="myInfoRole" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label>Reset Password</label>
+        <div class="password-container">
+          <input type="password" id="newPassword" class="form-control" placeholder="New password">
+          <button type="button" class="password-toggle" onclick="togglePassword('newPassword')">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <button class="btn" onclick="resetPassword()" id="resetPassBtn">
+        <i class="fas fa-key"></i> Reset Password
+      </button>
+      <button class="btn" onclick="hideAllMenus()" style="margin-left: 10px;">
+        <i class="fas fa-times"></i> Close
+      </button>
+      <div id="myInfoResult" style="margin-top: 15px;"></div>
+    </div>
+
+    <!-- Attack Menu -->
+    <div class="card hidden fade-in" id="attackMenu">
+      <h2><i class="fas fa-bug"></i> Attack Menu</h2>
+
+      <div class="attack-type-toggle">
+        <label class="toggle-option">
+          <input type="radio" name="attackType" value="phone" checked onclick="switchAttackType('phone')">
+          <span><i class="fab fa-whatsapp"></i> WhatsApp Number</span>
+        </label>
+        <label class="toggle-option">
+          <input type="radio" name="attackType" value="whatsapp" onclick="switchAttackType('whatsapp')">
+          <span><i class="fab fa-whatsapp"></i> WhatsApp Group</span>
+        </label>
+      </div>
+
+      <div id="phoneAttackSection">
+        <div class="form-group">
+          <label>Target Number</label>
+          <input type="text" id="targetNumber" class="form-control" placeholder="Example: 6281234567890">
+          <small class="input-hint">10-15 digits, no spaces or special characters</small>
+        </div>
+        <div class="form-group">
+          <label>Select Bug Type</label>
+          <select id="bugType" class="form-control">
+            <option value="invisible_crash">Invisible Crash</option>
+            <option value="invisible_ios">Invisible IOS</option>
+            <option value="delay_msc">Delay MSC</option>
+          </select>
+        </div>
+        <button class="btn launch-btn tooltip-container" onclick="launchAttack()" id="attackBtn">
+          <i class="fas fa-rocket"></i> Launch Attack
+          <span class="tooltip-text">Max 5 requests per minute</span>
+        </button>
+      </div>
+
+      <div id="whatsappAttackSection" class="hidden">
+        <div class="form-group">
+          <label>WhatsApp Group Link</label>
+          <input type="text" id="whatsappGroup" class="form-control" placeholder="https://chat.whatsapp.com/...">
+          <small class="input-hint">Valid WhatsApp group invite link</small>
+        </div>
+        <div class="form-group">
+          <label>Select Bug Type</label>
+          <select id="whatsappBugType" class="form-control">
+            <option value="group_crash">Group Crash</option>
+            <option value="group_spam">Group Spam</option>
+          </select>
+        </div>
+        <button class="btn launch-btn tooltip-container" onclick="sendGroupBug()" id="whatsappAttackBtn">
+          <i class="fas fa-paper-plane"></i> Send Group Bug
+          <span class="tooltip-text">Requires valid group invite link</span>
+        </button>
+      </div>
+
+      <div class="form-group" id="apiStatusContainer">
+        <label>API Status</label>
+        <div id="apiStatus" class="status-checking">
+          <i class="fas fa-circle-notch fa-spin"></i> Checking...
+        </div>
+      </div>
+      
+      <button class="btn" onclick="hideAllMenus()" style="margin-top: 15px;">
+        <i class="fas fa-times"></i> Close Menu
+      </button>
+      
+      <div id="attackResult" style="margin-top: 15px;"></div>
+    </div>
+
+    <!-- Admin: Create User -->
+    <div class="card hidden fade-in" id="adminCreateUser">
+      <h2><i class="fas fa-user-plus"></i> Create User</h2>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="newUsername" class="form-control" placeholder="3-20 characters (a-z, 0-9, _)">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="password-container">
+          <input type="password" id="newUserPassword" class="form-control" placeholder="User password">
+          <button type="button" class="password-toggle" onclick="togglePassword('newUserPassword')">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select id="newUserRole" class="form-control">
+          <option value="admin">Admin</option>
+          <option value="reseller">Reseller</option>
+          <option value="user" selected>User</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Expiration Days</label>
+        <input type="number" id="newUserDays" class="form-control" min="1" value="30">
+      </div>
+      <button class="btn" onclick="createUser()" id="createUserBtn">
+        <i class="fas fa-save"></i> Create User
+      </button>
+      <button class="btn" onclick="hideAllMenus()" style="margin-left: 10px;">
+        <i class="fas fa-times"></i> Close
+      </button>
+      <div id="createUserResult" style="margin-top: 15px;"></div>
+    </div>
+
+    <!-- Admin: List Users -->
+    <div class="card hidden fade-in" id="adminListUsers">
+      <h2><i class="fas fa-users"></i> User List</h2>
+      <div style="overflow-x: auto;">
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Expired</th>
+              <th>Device ID</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userListBody"></tbody>
+        </table>
+      </div>
+      <button class="btn" onclick="hideAllMenus()" style="margin-top: 15px;">
+        <i class="fas fa-times"></i> Close
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
