@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 2001;
+const PORT = process.env.PORT || 3000;
 
 // Menyajikan file HTML, CSS, JS dari folder "public"
 app.use(express.static('public'));
